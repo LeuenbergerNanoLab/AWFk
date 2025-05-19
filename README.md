@@ -7,4 +7,4 @@ Intensity of the color is proportional to the absolute value of the wave functio
 
 
 
-![GitHub Logo](https://github.com/LeuenbergerNanoLab/AWFk/blob/main/E_B1_A16.png)
+![GitHub Logo](E_B1_A16.png)
