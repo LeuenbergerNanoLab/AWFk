@@ -20,7 +20,6 @@
     call read_k_points(nk,kp)
     call calc_max(Acvk_re,Acvk_im,nc,nv,nk,kp)
     call calc_max_abs(Acvk_re,Acvk_im,nc,nv,nk,abs0,kp)
-!    call write_tecplot(kp,Acvk_re,Acvk_im,nc,nv,nk)
     call write_gnuplot(kp,Acvk_re,Acvk_im,nc,nv,nk,abs0)
    end Program Acvk1
 
@@ -227,32 +226,6 @@
 
 
 
-   subroutine write_tecplot(kp,Acvk_re,Acvk_im,nc,nv,nk)
-    integer               :: nc,nv,nk
-    real(8)               :: Acvk_re(nv,nc,nk)
-    real(8)               :: Acvk_im(nv,nc,nk)
-    real(8)               :: kp(3,nk)           ! k-points in cartesian coordinates
-    character(1)          :: fstr
-    do iv = 1,nv
-     print *,'**** iv=',iv
-     do ic = 1,nc
-      print *,'ic=',ic
-      open(unit=1,file='A'//fstr(iv)//fstr(ic)//'.dat')
-       write(1,1) nk
-       do ik=1,nk
-        abs = dsqrt(Acvk_re(iv,ic,ik)**2+Acvk_im(iv,ic,ik)**2)
-        phi = datan2(Acvk_im(iv,ic,ik),Acvk_re(iv,ic,ik))
-        write(1,2) kp(1:2,ik),Acvk_re(iv,ic,ik),Acvk_im(iv,ic,ik),abs,phi
-       enddo
-      close(unit=1)
-     enddo
-    enddo
- 1  format('VARIABLES = "kx", "ky", "Re", "Im", "Abs", "Phi"'/'ZONE I=',I4,' F=POINT')
- 2  format(2F11.6,4E15.5)    
-   end subroutine write_tecplot
-
-
-
      character(len=1) function fstr(k)                             !   Convert an integer to character*7
       integer, intent(in) :: k
       write (fstr,'(I1)') k
@@ -432,7 +405,6 @@
      I1 = 255 - 2*I
      write (col,'(Z2)') I1
     elseif(I>127.and.I<=255) then
-!     I1 = int(dabs(255.d0-2.d0*I)/1.83d0)
      I1 = 382 - I
      write (col,'(Z2)') I1
     else
