@@ -6,3 +6,4 @@ Intensity of the color is proportional to the absolute value of the wave functio
 
 
 
+![GitHub Logo](https://github.com/Dmitry-Skachkov/SchottkyBarrier/blob/main/Docs/logo.jpg)
